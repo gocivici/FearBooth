@@ -13,8 +13,8 @@ max_samples = 10
 # img = cv2.imread("test.jpg")
 cam = cv2.VideoCapture(1)
 # cam.set(cv2.cv.CV_CAP_PROP_FPS, 10)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+# cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+# cam.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 noFace = cv2.imread("noFace.png")
 
 # ft = cv2.freetype.createFreeType2()
@@ -30,10 +30,10 @@ if cam.isOpened():
     while True:
         ret, img = cam.read()
         if ret:
-            img = cv2.resize(img, (80,60), interpolation = cv2.INTER_AREA)
-            print(img.shape)
+            face = cv2.resize(img, (120,160), interpolation = cv2.INTER_AREA)
+            #print(img.shape)
             try:
-                predictions = DeepFace.analyze(img,actions=['emotion'])
+                predictions = DeepFace.analyze(face,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
 
                 readings = np.append(readings, fearPoint)
@@ -47,18 +47,18 @@ if cam.isOpened():
                 #     avgNumber = avgNumber + fearPoint
 
                 # print(avgNumber)
-                # img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
-                # img = Image.fromarray(img)
-                # draw = ImageDraw.Draw(img)
-                # font_size = 65
-                # font = ImageFont.truetype("HalloweenFont.ttf", font_size)
-                # text = "FEAR LEVEL"
-                # draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
-                # img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
+                img = Image.fromarray(img)
+                draw = ImageDraw.Draw(img)
+                font_size = 65
+                font = ImageFont.truetype("HalloweenFont.ttf", font_size)
+                text = "FEAR LEVEL"
+                draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
+                img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 #print(30+math.floor(int(fearPoint)*580/100))
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
-                # cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
-                # cv2.rectangle(img,(30,400),(30+math.floor(int(avg)*580/100),450),(255,255,255), -1)
+                cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
+                cv2.rectangle(img,(30,400),(30+math.floor(int(avg)*580/100),450),(255,255,255), -1)
                 cv2.imshow('webcam',img)
             except Exception as e: 
                 print(e)
