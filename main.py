@@ -46,8 +46,14 @@ if cam.isOpened():
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(fearPoint))
-                if fearPoint>20:
+                if fearPoint>10:
                     cv2.imwrite('scared.jpg', img) 
+                    basewidth = 384
+                    imgCrop = Image.open('scared.jpg')
+                    wpercent = (basewidth/float(imgCrop.size[0]))
+                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
+                    imgCrop = imgCrop.resize((basewidth,hsize), Image.ANTIALIAS)
+                    imgCrop = imgCrop.save("cropScared.jpg")
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
