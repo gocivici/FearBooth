@@ -11,7 +11,7 @@ from PIL import ImageFont
 
 from deepface import DeepFace #pip install deepface
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 
 printer = Serial(devfile='/dev/serial0',baudrate=19200,bytesize=8,parity='N',stopbits=1.00,dsrdtr=True)
 printer.set(density=10)
@@ -50,16 +50,7 @@ if cam.isOpened():
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(fearPoint))
-                if fearPoint>10:
-                    cv2.imwrite('scared.jpg', img) 
-                    basewidth = 384
-                    imgCrop = Image.open('scared.jpg')
-                    wpercent = (basewidth/float(imgCrop.size[0]))
-                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
-                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
-                    imgCrop = imgCrop.save("cropScared.jpg")
-                    printer.image(imgCrop)
-                    printer.text("\n\n\n\n")
+
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
@@ -72,6 +63,18 @@ if cam.isOpened():
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
                 cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
                 cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
+                
+                 if fearPoint>10:
+                    cv2.imwrite('scared.jpg', img) 
+                    basewidth = 384
+                    imgCrop = Image.open('scared.jpg')
+                    wpercent = (basewidth/float(imgCrop.size[0]))
+                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
+                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
+                    imgCrop = imgCrop.save("cropScared.jpg")
+                    cv2.waitKey(500)
+                    printer.image(cropScared.jpg)
+                    printer.text("\n\n\n\n")               
                 cv2.imshow('webcam',img)
                 cv2.waitKey(5000)
 
