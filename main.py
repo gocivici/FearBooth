@@ -11,7 +11,7 @@ from PIL import ImageFont
 
 from deepface import DeepFace #pip install deepface
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 
 printer = Serial(devfile='/dev/serial0',baudrate=19200,bytesize=8,parity='N',stopbits=1.00,dsrdtr=True)
 printer.set(density=10)
@@ -56,7 +56,7 @@ if cam.isOpened():
                     imgCrop = Image.open('scared.jpg')
                     wpercent = (basewidth/float(imgCrop.size[0]))
                     hsize = int((float(imgCrop.size[1])*float(wpercent)))
-                    imgCrop = imgCrop.resize((basewidth,hsize), Image.ANTIALIAS)
+                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
                     imgCrop = imgCrop.save("cropScared.jpg")
                     printer.image(imgCrop)
                     printer.text("\n\n\n\n")
