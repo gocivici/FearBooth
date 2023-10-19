@@ -73,7 +73,7 @@ if cam.isOpened():
                     imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
                     imgCrop = imgCrop.save("cropScared.jpg")
                     cv2.waitKey(500)
-                    printer.image(cropScared.jpg)
+                    printer.image("cropScared.jpg")
                     printer.text("\n\n\n\n")               
                 cv2.imshow('webcam',img)
                 cv2.waitKey(5000)
