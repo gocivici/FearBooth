@@ -3,14 +3,18 @@ import time
 import numpy as np
 import cv2 #pip install opencv-python ||| pip3 install opencv-contrib-python==4.4.0.46
 
+from escpos.printer import Serial
+
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
 from deepface import DeepFace #pip install deepface
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 
+printer = Serial(devfile='/dev/serial0',baudrate=19200,bytesize=8,parity='N',stopbits=1.00,dsrdtr=True)
+printer.set(density=10)
 cameraMode = False
 TIMER = 5
 
@@ -54,6 +58,8 @@ if cam.isOpened():
                     hsize = int((float(imgCrop.size[1])*float(wpercent)))
                     imgCrop = imgCrop.resize((basewidth,hsize), Image.ANTIALIAS)
                     imgCrop = imgCrop.save("cropScared.jpg")
+                    printer.image(imgCrop)
+                    printer.text("\n\n\n\n")
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
