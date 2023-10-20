@@ -12,7 +12,7 @@ from PIL import ImageFont
 from deepface import DeepFace #pip install deepface
 button = Button(2)
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 
 printer = Serial(devfile='/dev/serial0',baudrate=19200,bytesize=8,parity='N',stopbits=1.00,dsrdtr=True)
 printer.set(density=10)
