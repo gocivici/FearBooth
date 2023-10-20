@@ -85,8 +85,8 @@ if cam.isOpened():
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 #print(30+math.floor(int(fearPoint)*580/100))
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
-                #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
-                #cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
+                cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
+                cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
                 
               
                 cv2.imshow('webcam',img)
