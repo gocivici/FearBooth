@@ -24,7 +24,7 @@ startScreen = cv2.imread("noFace.png")
 if cam.isOpened():
     while True:
         ret, img = cam.read()
-        img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+        # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
         if cameraMode and ret:
             prev = time.time() 
             while TIMER > 0:
@@ -50,13 +50,13 @@ if cam.isOpened():
                     break
             else:
                 ret, img = cam.read()
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+                # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(round(fearPoint,2)))
                 if fearPoint>0:
-                    
-                    cv2.imwrite('scared.jpg', img) 
+                    rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+                    cv2.imwrite('scared.jpg', rotoImg) 
                     basewidth = 384
                     imgCrop = Image.open('scared.jpg')
                     wpercent = (basewidth/float(imgCrop.size[0]))
