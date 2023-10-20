@@ -23,10 +23,12 @@ startScreen = cv2.imread("noFace.png")
 if cam.isOpened():
     while True:
         ret, img = cam.read()
+        img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
         if cameraMode and ret:
             prev = time.time() 
             while TIMER > 0:
                 ret, img = cam.read()
+                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
@@ -47,10 +49,29 @@ if cam.isOpened():
                     break
             else:
                 ret, img = cam.read()
+                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
-                print("FEAR:" + str(fearPoint))
-
+                print("FEAR:" + str(round(fearPoint,2)))
+                if fearPoint>0:
+                    
+                    cv2.imwrite('scared.jpg', img) 
+                    basewidth = 384
+                    imgCrop = Image.open('scared.jpg')
+                    wpercent = (basewidth/float(imgCrop.size[0]))
+                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
+                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
+                    imgCrop = imgCrop.save("cropScared.jpg")
+                    cv2.waitKey(2000)
+                    printer.set(align='center',font='b',width=2,height=2)
+                 
+                    printer.image("cropScared.jpg")
+                    printer.text("Fear Level: \n" + str(round(fearPoint,2))+"/100\n")  
+                    printer.text("(Scream Queen)\n")
+                    #printer.set(align='center',font='b',width=1,height=1)
+                    #printer.text("Spooky Night 2023")
+                    #printer.text("2023\n")
+                    printer.text("\n\n\n\n")
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
@@ -61,20 +82,10 @@ if cam.isOpened():
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 #print(30+math.floor(int(fearPoint)*580/100))
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
-                cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
-                cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
+                #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
+                #cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
                 
-                if fearPoint>10:
-                    cv2.imwrite('scared.jpg', img) 
-                    basewidth = 384
-                    imgCrop = Image.open('scared.jpg')
-                    wpercent = (basewidth/float(imgCrop.size[0]))
-                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
-                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
-                    imgCrop = imgCrop.save("cropScared.jpg")
-                    cv2.waitKey(500)
-                    printer.image("cropScared.jpg")
-                    printer.text("\n\n\n\n")               
+              
                 cv2.imshow('webcam',img)
                 cv2.waitKey(5000)
 
