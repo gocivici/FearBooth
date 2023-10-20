@@ -12,8 +12,9 @@ from PIL import ImageFont
 from deepface import DeepFace #pip install deepface
 button = Button(2)
 
-cam = cv2.VideoCapture(0)
-
+cam = cv2.VideoCapture(1)
+cv2.namedWindow("webcam", cv2.WND_PROP_FULLSCREEN)
+cv2.setWindowProperty("webcam",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 printer = Serial(devfile='/dev/serial0',baudrate=19200,bytesize=8,parity='N',stopbits=1.00,dsrdtr=True)
 printer.set(density=10)
 cameraMode = False
@@ -29,7 +30,7 @@ if cam.isOpened():
             prev = time.time() 
             while TIMER > 0:
                 ret, img = cam.read()
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+                # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
