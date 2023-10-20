@@ -2,7 +2,7 @@ import math
 import time
 import numpy as np
 import cv2 #pip install opencv-python ||| pip3 install opencv-contrib-python==4.4.0.46
-
+from gpiozero import Button
 from escpos.printer import Serial
 
 from PIL import Image
@@ -10,6 +10,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 from deepface import DeepFace #pip install deepface
+button = Button(2)
 
 cam = cv2.VideoCapture(1)
 
@@ -97,7 +98,7 @@ if cam.isOpened():
             cv2.imshow('webcam',startScreen) 
         
         key = cv2.waitKey(5) & 0xFF
-        if ord('t') == key:
+        if ord('t') == key or button.is_pressed:
             cameraMode = True
         if ord('q') == key:
             break
