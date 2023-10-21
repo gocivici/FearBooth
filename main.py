@@ -58,9 +58,18 @@ if cam.isOpened():
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(round(fearPoint,2)))
+                cv2.imwrite('scared.jpg', img) 
+                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
+                img = Image.fromarray(img)
+                draw = ImageDraw.Draw(img)
+                font_size = 65
+                font = ImageFont.truetype("HalloweenFont.ttf", font_size)
+                text = "FEAR LEVEL"
+                draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
+                img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-                    cv2.imwrite('scared.jpg', img) 
+                    
                     basewidth = 384
                     imgCrop = Image.open('scared.jpg')
                     wpercent = (basewidth/float(imgCrop.size[0]))
@@ -78,14 +87,7 @@ if cam.isOpened():
                     #printer.text("2023\n")
                     printer.text("\n\n\n\n")
                     # cv2.waitKey(5000)
-                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
-                img = Image.fromarray(img)
-                draw = ImageDraw.Draw(img)
-                font_size = 65
-                font = ImageFont.truetype("HalloweenFont.ttf", font_size)
-                text = "FEAR LEVEL"
-                draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
-                img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+                
                 #print(30+math.floor(int(fearPoint)*580/100))
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
                 #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
