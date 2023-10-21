@@ -28,7 +28,7 @@ if cam.isOpened():
         # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
         if cameraMode and ret:
             prev = time.time() 
-            while TIMER > 0:
+            while TIMER >= 0:
                 ret, img = cam.read()
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA)
@@ -38,7 +38,8 @@ if cam.isOpened():
                 draw = ImageDraw.Draw(img)
                 font_size = 200
                 font = ImageFont.truetype("HalloweenFont.ttf", font_size)
-                draw.text((180, 400), str(TIMER), font=font,fill=(255,0,0,255))
+                if TIMER>0:
+                    draw.text((180, 400), str(TIMER), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 cv2.imshow('webcam',img)
@@ -67,10 +68,10 @@ if cam.isOpened():
                 draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
-                cv2.imshow('webcam',img)
+                # cv2.imshow('webcam',img)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-                    
+                    cv2.imshow('webcam',img)
                     basewidth = 384
                     imgCrop = Image.open('scared.jpg')
                     wpercent = (basewidth/float(imgCrop.size[0]))
