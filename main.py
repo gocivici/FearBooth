@@ -95,7 +95,7 @@ if cam.isOpened():
                 #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
                 #cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
 
-                cv2.waitKey(5000)
+                # cv2.waitKey(5000)
 
 
 
