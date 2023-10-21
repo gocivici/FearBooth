@@ -68,10 +68,11 @@ if cam.isOpened():
                 draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
-                # cv2.imshow('webcam',img)
+                cv2.imshow('webcam',img)
+                cv2.waitKey(3000)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-                    cv2.imshow('webcam',img)
+                    # cv2.imshow('webcam',img)
                     basewidth = 384
                     imgCrop = Image.open('scared.jpg')
                     wpercent = (basewidth/float(imgCrop.size[0]))
