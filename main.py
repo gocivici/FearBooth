@@ -36,10 +36,10 @@ if cam.isOpened():
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
-                font_size = 350
+                font_size = 200
                 font = ImageFont.truetype("HalloweenFont.ttf", font_size)
                 if TIMER>1:
-                    draw.text((231, 50), str(TIMER), font=font,fill=(255,0,0,255))
+                    draw.text((180, 479), str(TIMER), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 cv2.imshow('webcam',img)
