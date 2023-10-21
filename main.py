@@ -36,13 +36,13 @@ if cam.isOpened():
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
-                font_size = 200
-                font = ImageFont.truetype("HalloweenFont.ttf", font_size)
+                
+                fontBIG = ImageFont.truetype("HalloweenFont.ttf", 200)
+                fontSmall = ImageFont.truetype("HalloweenFont.ttf", 60)
                 if TIMER>0:
-                    draw.text((180, 400), str(TIMER), font=font,fill=(255,0,0,255))
+                    draw.text((180, 400), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
-                    font_size = 60
-                    draw.text((30, 400), "ANALYZING...", font=font,fill=(255,0,0,255))
+                    draw.text((30, 400), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 cv2.imshow('webcam',img)
@@ -74,7 +74,7 @@ if cam.isOpened():
                 cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
                 cv2.imshow('webcam',img)
-                cv2.waitKey(3000)
+                cv2.waitKey(5000)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                     # cv2.imshow('webcam',img)
