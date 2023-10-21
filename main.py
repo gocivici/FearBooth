@@ -32,7 +32,7 @@ if cam.isOpened():
                 ret, img = cam.read()
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA)
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+                img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
@@ -41,7 +41,7 @@ if cam.isOpened():
                 if TIMER>1:
                     draw.text((231, 50), str(TIMER), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-                img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 cv2.imshow('webcam',img)
                 # print(str(TIMER))
                 cur = time.time() #current time
@@ -53,7 +53,7 @@ if cam.isOpened():
                     break
             else:
                 ret, img = cam.read()
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+                img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
@@ -90,7 +90,7 @@ if cam.isOpened():
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
                 #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
                 #cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
-                img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
+                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
               
                 cv2.imshow('webcam',img)
                 cv2.waitKey(5000)
