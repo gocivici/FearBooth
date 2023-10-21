@@ -67,7 +67,7 @@ if cam.isOpened():
                     hsize = int((float(imgCrop.size[1])*float(wpercent)))
                     imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
                     imgCrop = imgCrop.save("cropScared.jpg")
-                    cv2.waitKey(2000)
+                    # cv2.waitKey(2000)
                     printer.set(align='center',font='b',width=2,height=2)
                  
                     printer.image("cropScared.jpg",impl="bitImageColumn")
@@ -77,7 +77,7 @@ if cam.isOpened():
                     #printer.text("Spooky Night 2023")
                     #printer.text("2023\n")
                     printer.text("\n\n\n\n")
-                    cv2.waitKey(5000)
+                    # cv2.waitKey(5000)
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
