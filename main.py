@@ -67,6 +67,8 @@ if cam.isOpened():
                 text = "FEAR LEVEL"
                 draw.text((144, 308), str(text), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+                cv2.imshow('webcam',img)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                     
@@ -92,9 +94,7 @@ if cam.isOpened():
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
                 #cv2.rectangle(img,(30,400),(610,450),(255,255,255), 5)
                 #cv2.rectangle(img,(30,400),(30+math.floor(int(fearPoint)*580/100),450),(255,255,255), -1)
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
-              
-                cv2.imshow('webcam',img)
+
                 cv2.waitKey(5000)
 
 
