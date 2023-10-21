@@ -42,7 +42,7 @@ if cam.isOpened():
                 if TIMER>0:
                     draw.text((180, 400), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
-                    draw.text((30, 400), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
+                    draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 cv2.imshow('webcam',img)
@@ -70,8 +70,9 @@ if cam.isOpened():
                 text = "FEAR LEVEL"
                 draw.text((59, 452), str(text), font=font,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-                cv2.rectangle(img,(30,550),(450,600),(255,255,255), 5)
+
                 cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
+                cv2.rectangle(img,(30,550),(450,600),(0,0,255), 5)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
                 cv2.imshow('webcam',img)
                 cv2.waitKey(5000)
