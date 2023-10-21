@@ -77,7 +77,7 @@ if cam.isOpened():
                     #printer.text("Spooky Night 2023")
                     #printer.text("2023\n")
                     printer.text("\n\n\n\n")
-                    cv2.waitKey(5000)
+                    # cv2.waitKey(5000)
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
