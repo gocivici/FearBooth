@@ -75,7 +75,7 @@ if cam.isOpened():
                 cv2.rectangle(img,(30,550),(450,600),(0,0,255), 8)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
                 cv2.imshow('webcam',img)
-                cv2.waitKey(7000)
+                cv2.waitKey(2000)
                 if fearPoint>0:
                     #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                     # cv2.imshow('webcam',img)
