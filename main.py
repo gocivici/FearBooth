@@ -62,6 +62,7 @@ if cam.isOpened():
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(round(fearPoint,2)))
                 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                imgGray = cv2.equalizeHist(imgGray) 
                 cv2.imwrite('scared.jpg', imgGray) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
