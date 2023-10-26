@@ -88,7 +88,7 @@ if cam.isOpened():
                     # cv2.waitKey(2000)
                     printer.set(align='center',font='b',width=2,height=2)
                  
-                    printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageColumn")
+                    printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
                     printer.text("Fear Level: \n" + str(round(fearPoint,2))+"/100\n")  
                     printer.text("(Scream Queen)\n")
                     printer.text("\n\n\n\n")
