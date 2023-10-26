@@ -61,7 +61,8 @@ if cam.isOpened():
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
                 print("FEAR:" + str(round(fearPoint,2)))
-                cv2.imwrite('scared.jpg', img) 
+                imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                cv2.imwrite('scared.jpg', imgGray) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
