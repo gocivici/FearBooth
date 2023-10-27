@@ -104,7 +104,10 @@ if cam.isOpened():
                         printer.text("Fear Level \n" + str(round(fearPoint,1))+"%\n")  
                         # printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
                         # printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
-                        #printer.text("(Scream Queen)\n")
+                        if fearPoint>80:
+                            printer.text("(Scream Queen)\n")
+                        if fearPoint<5:
+                            printer.text("(The Killer)\n")
                         printer.text("\n\n\n\n")
                         #printer.set(align='center',font='b',width=1,height=1)
                         #printer.text("Spooky Night 2023")
