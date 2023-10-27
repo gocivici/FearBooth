@@ -38,7 +38,7 @@ if cam.isOpened():
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
                 
-                fontBIG = ImageFont.truetype("HalloweenFont.ttf", 200)
+                fontBIG = ImageFont.truetype("HalloweenFont.ttf", 250)
                 fontSmall = ImageFont.truetype("HalloweenFont.ttf", 60)
                 if TIMER>0:
                     draw.text((180, 400), str(TIMER), font=fontBIG,fill=(255,0,0,255))
@@ -74,10 +74,10 @@ if cam.isOpened():
                     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                     img = Image.fromarray(img)
                     draw = ImageDraw.Draw(img)
-                    font_size = 65
+                    font_size = 75
                     font = ImageFont.truetype("HalloweenFont.ttf", font_size)
                     text = "FEAR LEVEL"
-                    draw.text((59, 452), str(text), font=font,fill=(255,0,0,255))
+                    draw.text((30, 452), str(text), font=font,fill=(255,0,0,255))
                     img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
                     cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
