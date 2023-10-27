@@ -43,6 +43,7 @@ if cam.isOpened():
                 if TIMER>0:
                     draw.text((130, 300), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
+                    cv2.imwrite("Fear_{}.jpg".format(prev))
                     draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
@@ -99,7 +100,7 @@ if cam.isOpened():
                         printer.set(align='center',font='a',width=2,height=2)
                     
                         printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
-                        printer.text("Fear Level: \n" + str(round(fearPoint,1))+"%\n")  
+                        printer.text("Fear Level \n" + str(round(fearPoint,1))+"%\n")  
                         # printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
                         # printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
                         #printer.text("(Scream Queen)\n")
