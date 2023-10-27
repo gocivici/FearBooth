@@ -96,7 +96,7 @@ if cam.isOpened():
                         imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
                         imgCrop = imgCrop.save("cropScared.jpg")
                         # cv2.waitKey(2000)
-                        printer.set(align='center',font='b',width=2,height=2)
+                        printer.set(align='center',font='a',width=2,height=2)
                     
                         printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
                         printer.text("Fear Level: \n" + str(round(fearPoint,1))+"%\n")  
