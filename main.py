@@ -41,7 +41,7 @@ if cam.isOpened():
                 fontBIG = ImageFont.truetype("HalloweenFont.ttf", 350)
                 fontSmall = ImageFont.truetype("HalloweenFont.ttf", 60)
                 if TIMER>0:
-                    draw.text((130, 300), str(TIMER), font=fontBIG,fill=(255,0,0,255))
+                    draw.text((130, 150), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
                     
                     draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
