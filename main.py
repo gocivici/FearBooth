@@ -60,7 +60,9 @@ if cam.isOpened():
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
                 fearPoint = predictions[0]["emotion"]["fear"]
+                surprisePoint = predictions[0]["emotion"]["surprise"]
                 print("FEAR:" + str(round(fearPoint,2)))
+                print("SURPRISE:" + str(round(surprisePoint,2)))
                 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 imgGray = cv2.equalizeHist(imgGray) 
                 cv2.imwrite('scared.jpg', imgGray) 
@@ -92,7 +94,8 @@ if cam.isOpened():
                  
                     printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
                     printer.text("Fear Level: \n" + str(round(fearPoint,2))+"/100\n")  
-                    printer.text("(Scream Queen)\n")
+                    printer.text("Surprise Level: \n" + str(round(surprisePoint,2))+"/100\n")  
+                    #printer.text("(Scream Queen)\n")
                     printer.text("\n\n\n\n")
                     #printer.set(align='center',font='b',width=1,height=1)
                     #printer.text("Spooky Night 2023")
