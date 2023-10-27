@@ -43,7 +43,7 @@ if cam.isOpened():
                 if TIMER>0:
                     draw.text((130, 300), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
-                    cv2.imwrite("Fear_{}.jpg".format(prev),img)
+                    
                     draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
@@ -72,6 +72,7 @@ if cam.isOpened():
                     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                     imgGray = cv2.equalizeHist(imgGray) 
                     cv2.imwrite('scared.jpg', imgGray) 
+                    cv2.imwrite("Fear_{}.jpg".format(cur),img)
                     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                     img = Image.fromarray(img)
                     draw = ImageDraw.Draw(img)
