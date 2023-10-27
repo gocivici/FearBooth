@@ -72,7 +72,7 @@ if cam.isOpened():
                     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                     imgGray = cv2.equalizeHist(imgGray) 
                     cv2.imwrite('scared.jpg', imgGray) 
-                    cv2.imwrite("Fear_{}.jpg".format(cur),img)
+                    cv2.imwrite("/home/gogo/Desktop/Photos/Fear_{}.jpg".format(cur),img)
                     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                     img = Image.fromarray(img)
                     draw = ImageDraw.Draw(img)
