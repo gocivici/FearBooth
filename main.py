@@ -38,10 +38,10 @@ if cam.isOpened():
                 img = Image.fromarray(img)
                 draw = ImageDraw.Draw(img)
                 
-                fontBIG = ImageFont.truetype("HalloweenFont.ttf", 250)
+                fontBIG = ImageFont.truetype("HalloweenFont.ttf", 350)
                 fontSmall = ImageFont.truetype("HalloweenFont.ttf", 60)
                 if TIMER>0:
-                    draw.text((180, 400), str(TIMER), font=fontBIG,fill=(255,0,0,255))
+                    draw.text((170, 380), str(TIMER), font=fontBIG,fill=(255,0,0,255))
                 else:
                     draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
