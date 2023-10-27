@@ -61,52 +61,56 @@ if cam.isOpened():
                 img = cv2.flip(img, 0)
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-                predictions = DeepFace.analyze(img,actions=['emotion'])
-                fearValue = predictions[0]["emotion"]["fear"]
-                surpriseValue = predictions[0]["emotion"]["surprise"]
-                fearPoint = max(fearValue,surpriseValue)
-                print("FEAR:" + str(round(fearPoint,2)))
-                print("SURPRISE:" + str(round(surpriseValue,2)))
-                imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                imgGray = cv2.equalizeHist(imgGray) 
-                cv2.imwrite('scared.jpg', imgGray) 
-                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
-                img = Image.fromarray(img)
-                draw = ImageDraw.Draw(img)
-                font_size = 65
-                font = ImageFont.truetype("HalloweenFont.ttf", font_size)
-                text = "FEAR LEVEL"
-                draw.text((59, 452), str(text), font=font,fill=(255,0,0,255))
-                img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+                try:
+                    predictions = DeepFace.analyze(img,actions=['emotion'])
+                    fearValue = predictions[0]["emotion"]["fear"]
+                    surpriseValue = predictions[0]["emotion"]["surprise"]
+                    fearPoint = max(fearValue,surpriseValue)
+                    print("FEAR:" + str(round(fearPoint,2)))
+                    print("SURPRISE:" + str(round(surpriseValue,2)))
+                    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    imgGray = cv2.equalizeHist(imgGray) 
+                    cv2.imwrite('scared.jpg', imgGray) 
+                    img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
+                    img = Image.fromarray(img)
+                    draw = ImageDraw.Draw(img)
+                    font_size = 65
+                    font = ImageFont.truetype("HalloweenFont.ttf", font_size)
+                    text = "FEAR LEVEL"
+                    draw.text((59, 452), str(text), font=font,fill=(255,0,0,255))
+                    img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
-                cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
-                cv2.rectangle(img,(30,550),(450,600),(0,0,255), 8)
-                img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+                    cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
+                    cv2.rectangle(img,(30,550),(450,600),(0,0,255), 8)
+                    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
 
-                cv2.imshow('webcam',img)
-                cv2.waitKey(2000)
-                if fearPoint>0:
-                    #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-                    # cv2.imshow('webcam',img)
-                    basewidth = 384
-                    imgCrop = Image.open('scared.jpg')
-                    wpercent = (basewidth/float(imgCrop.size[0]))
-                    hsize = int((float(imgCrop.size[1])*float(wpercent)))
-                    imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
-                    imgCrop = imgCrop.save("cropScared.jpg")
-                    # cv2.waitKey(2000)
-                    printer.set(align='center',font='b',width=2,height=2)
-                 
-                    printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
-                    printer.text("Fear Level: \n" + str(round(fearValue,2))+"/100\n")  
-                    printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
-                    printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
-                    #printer.text("(Scream Queen)\n")
-                    printer.text("\n\n\n\n")
-                    #printer.set(align='center',font='b',width=1,height=1)
-                    #printer.text("Spooky Night 2023")
-                    #printer.text("2023\n")
-                    # cv2.waitKey(5000)
+                    cv2.imshow('webcam',img)
+                    cv2.waitKey(2000)
+                    if fearPoint>0:
+                        #rotoImg = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+                        # cv2.imshow('webcam',img)
+                        basewidth = 384
+                        imgCrop = Image.open('scared.jpg')
+                        wpercent = (basewidth/float(imgCrop.size[0]))
+                        hsize = int((float(imgCrop.size[1])*float(wpercent)))
+                        imgCrop = imgCrop.resize((basewidth,hsize), Image.Resampling.LANCZOS)
+                        imgCrop = imgCrop.save("cropScared.jpg")
+                        # cv2.waitKey(2000)
+                        printer.set(align='center',font='b',width=2,height=2)
+                    
+                        printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
+                        printer.text("Fear Level: \n" + str(round(fearPoint,1))+"%\n")  
+                        # printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
+                        # printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
+                        #printer.text("(Scream Queen)\n")
+                        printer.text("\n\n\n\n")
+                        #printer.set(align='center',font='b',width=1,height=1)
+                        #printer.text("Spooky Night 2023")
+                        #printer.text("2023\n")
+                        # cv2.waitKey(5000)
+                except:
+                    cameraMode = False
+                    TIMER = 5
                 
                 #print(30+math.floor(int(fearPoint)*580/100))
                 # ft.putText(img=img,text='TEST',org=(15, 70),fontHeight=60,color=(255,  255, 255),thickness=-1,line_type=cv2.LINE_AA,bottomLeftOrigin=True)
