@@ -59,8 +59,9 @@ if cam.isOpened():
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
-                fearPoint = predictions[0]["emotion"]["fear"]
-                surprisePoint = predictions[0]["emotion"]["surprise"]
+                fearValue = predictions[0]["emotion"]["fear"]
+                surpriseValue = predictions[0]["emotion"]["surprise"]
+                fearPoint = max(fearValue,surpriseValue)
                 print("FEAR:" + str(round(fearPoint,2)))
                 print("SURPRISE:" + str(round(surprisePoint,2)))
                 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -93,8 +94,9 @@ if cam.isOpened():
                     printer.set(align='center',font='b',width=2,height=2)
                  
                     printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
-                    printer.text("Fear Level: \n" + str(round(fearPoint,2))+"/100\n")  
-                    printer.text("Surprise Level: \n" + str(round(surprisePoint,2))+"/100\n")  
+                    printer.text("Fear Level: \n" + str(round(fearValue,2))+"/100\n")  
+                    printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
+                    printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
                     #printer.text("(Scream Queen)\n")
                     printer.text("\n\n\n\n")
                     #printer.set(align='center',font='b',width=1,height=1)
