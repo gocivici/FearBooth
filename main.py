@@ -63,7 +63,7 @@ if cam.isOpened():
                 surpriseValue = predictions[0]["emotion"]["surprise"]
                 fearPoint = max(fearValue,surpriseValue)
                 print("FEAR:" + str(round(fearPoint,2)))
-                print("SURPRISE:" + str(round(surprisePoint,2)))
+                print("SURPRISE:" + str(round(surpriseValue,2)))
                 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 imgGray = cv2.equalizeHist(imgGray) 
                 cv2.imwrite('scared.jpg', imgGray) 
