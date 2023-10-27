@@ -101,7 +101,7 @@ if cam.isOpened():
                         printer.set(align='center',font='a',width=2,height=2)
                     
                         printer.image("cropScared.jpg",high_density_vertical=True,high_density_horizontal=False,impl="bitImageRaster")
-                        printer.text("Fear Level \n" + str(round(fearPoint,1))+"%\n")  
+                        printer.text("Fear Level\n" + str(round(fearPoint,1))+"%\n")  
                         # printer.text("Surprise Level: \n" + str(round(surpriseValue,2))+"/100\n")  
                         # printer.text("Overall: \n" + str(round(fearPoint,2))+"/100\n")  
                         if fearPoint>80:
