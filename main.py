@@ -32,6 +32,7 @@ if cam.isOpened():
                 ret, img = cam.read()
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA)
+                img = cv2.flip(img, 1)
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
@@ -45,6 +46,7 @@ if cam.isOpened():
                     draw.text((30, 480), "ANALYZING...", font=fontSmall,fill=(255,0,0,255))
                 img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+
                 cv2.imshow('webcam',img)
                 # print(str(TIMER))
                 cur = time.time() #current time
@@ -56,6 +58,7 @@ if cam.isOpened():
                     break
             else:
                 ret, img = cam.read()
+                img = cv2.flip(img, 1)
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
@@ -79,6 +82,7 @@ if cam.isOpened():
                 cv2.rectangle(img,(30,550),(30+math.floor(int(fearPoint)*420/100),600),(255,255,255), -1)
                 cv2.rectangle(img,(30,550),(450,600),(0,0,255), 8)
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) 
+
                 cv2.imshow('webcam',img)
                 cv2.waitKey(2000)
                 if fearPoint>0:
