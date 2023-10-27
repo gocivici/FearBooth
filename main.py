@@ -32,7 +32,7 @@ if cam.isOpened():
                 ret, img = cam.read()
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 # cv2.putText(img, str(TIMER), (200, 250), cv2.FONT_HERSHEY_SIMPLEX, 7, (0, 255, 255), 4, cv2.LINE_AA)
-                img = cv2.flip(img, 1)
+                img = cv2.flip(img, 0)
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) 
                 img = Image.fromarray(img)
@@ -58,7 +58,7 @@ if cam.isOpened():
                     break
             else:
                 ret, img = cam.read()
-                img = cv2.flip(img, 1)
+                img = cv2.flip(img, 0)
                 img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) 
                 # img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
                 predictions = DeepFace.analyze(img,actions=['emotion'])
